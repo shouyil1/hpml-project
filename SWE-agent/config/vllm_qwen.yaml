@@ -1,0 +1,20 @@
+agent:
+  model:
+    name: openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ
+    api_base: http://localhost:8000/v1
+    api_key: EMPTY
+    # MOVED HERE: These must be inside 'model'
+    per_instance_cost_limit: 0.0
+    total_cost_limit: 0.0
+    max_input_tokens: 30000
+    max_output_tokens: 4096
+    temperature: 0.0
+  templates:
+    system_template: |-
+      You are an expert software engineer.
+      You will be given a codebase and an issue to resolve.
+      Use the provided tools to explore, reproduce, and fix the issue.
+      Think step-by-step.
+  tools:
+    parse_function:
+      type: thought_action

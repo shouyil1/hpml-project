@@ -1,0 +1,7 @@
+{
+    "sqlfluff__sqlfluff-1625": {
+        "model_name_or_path": "vllm_qwen__openai--Qwen--Qwen2.5-Coder-14B-Instruct-AWQ__t-0.00__p-1.00__c-3.00___swe_bench_lite_dev",
+        "instance_id": "sqlfluff__sqlfluff-1625",
+        "model_patch": ""
+    }
+}

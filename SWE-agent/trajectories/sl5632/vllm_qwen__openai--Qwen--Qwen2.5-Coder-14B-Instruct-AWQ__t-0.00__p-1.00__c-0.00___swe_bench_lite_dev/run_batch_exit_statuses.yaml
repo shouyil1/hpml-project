@@ -1,0 +1,4 @@
+instances_by_exit_status:
+    skipped (exit_context):
+    - sqlfluff__sqlfluff-1625
+total_cost: 0

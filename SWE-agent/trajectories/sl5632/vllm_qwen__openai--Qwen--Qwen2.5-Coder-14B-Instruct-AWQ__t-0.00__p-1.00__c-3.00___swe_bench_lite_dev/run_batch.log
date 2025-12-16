@@ -1,0 +1,3 @@
+2025-12-02 22:30:28,241 - INFO - swea-run - Starting run. Find output files at /home/sl5632/SWE-agent/trajectories/sl5632/vllm_qwen__openai--Qwen--Qwen2.5-Coder-14B-Instruct-AWQ__t-0.00__p-1.00__c-3.00___swe_bench_lite_dev
+2025-12-02 22:30:28,244 - INFO - swea-run - Running on instance sqlfluff__sqlfluff-1625
+2025-12-02 22:33:36,050 - DEBUG - config - Choosing API key 0 for thread MainThread (idx 0)

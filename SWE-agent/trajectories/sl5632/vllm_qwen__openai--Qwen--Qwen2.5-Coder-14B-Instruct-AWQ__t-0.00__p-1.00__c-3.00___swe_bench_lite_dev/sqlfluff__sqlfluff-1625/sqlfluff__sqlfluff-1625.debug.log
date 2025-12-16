@@ -1,0 +1,104 @@
+2025-12-02 22:30:28,302 - INFO - rex-deploy - Pulling image 'docker.io/swebench/sweb.eval.x86_64.sqlfluff_1776_sqlfluff-1625:latest'
+2025-12-02 22:31:01,288 - INFO - rex-deploy - Building image docker.io/swebench/sweb.eval.x86_64.sqlfluff_1776_sqlfluff-1625:latest to install a standalone python to /root. This might take a while (but you only have to do it once). To skip this step, set `python_standalone_dir` to None.
+2025-12-02 22:33:32,664 - DEBUG - free_port - Found free port 33939
+2025-12-02 22:33:32,667 - INFO - rex-deploy - Starting container docker.ioswebenchsweb.eval.x86_64.sqlfluff_1776_sqlfluff-1625latest-8c7c1bf3-2a69-46b6-8283-a43b3c318410 with image docker.io/swebench/sweb.eval.x86_64.sqlfluff_1776_sqlfluff-1625:latest serving on port 33939
+2025-12-02 22:33:32,670 - DEBUG - rex-deploy - Command: "docker run --rm -p 33939:8000 --platform linux/amd64 --name docker.ioswebenchsweb.eval.x86_64.sqlfluff_1776_sqlfluff-1625latest-8c7c1bf3-2a69-46b6-8283-a43b3c318410 sha256:a7ab281fd9c4ad14133f1ea1141a79737a9d718ee964e08e5fd793925a7d978a /bin/sh -c '/root/python3.11/bin/swerex-remote --auth-token aab10b2b-064c-47d9-b463-bc2f9796a4cf'"
+2025-12-02 22:33:32,673 - INFO - rex-deploy - Starting runtime at 33939
+2025-12-02 22:33:33,845 - INFO - rex-deploy - Runtime started in 1.17s
+2025-12-02 22:33:34,759 - INFO - swea-env - Environment Initialized
+2025-12-02 22:33:34,983 - DEBUG - swea-env - Resetting repository testbed to commit 14e1a23a3166b9a645a16de96f694c77a5d4abb7
+2025-12-02 22:33:35,235 - INFO - swea-agent - Setting up agent for instance sqlfluff__sqlfluff-1625
+2025-12-02 22:33:35,238 - INFO - swea-agent - Trajectory will be saved to /home/sl5632/SWE-agent/trajectories/sl5632/vllm_qwen__openai--Qwen--Qwen2.5-Coder-14B-Instruct-AWQ__t-0.00__p-1.00__c-3.00___swe_bench_lite_dev/sqlfluff__sqlfluff-1625/sqlfluff__sqlfluff-1625.traj
+2025-12-02 22:33:35,678 - INFO - swea-tools - Resetting tools
+2025-12-02 22:33:36,030 - INFO - swea-agent - SYSTEM (main)
+You are an expert software engineer.
+You will be given a codebase and an issue to resolve.
+Use the provided tools to explore, reproduce, and fix the issue.
+Think step-by-step.
+2025-12-02 22:33:36,036 - DEBUG - swea-tools - Retrieved state from environment: {}
+2025-12-02 22:33:36,039 - INFO - swea-agent - 🤖 MODEL INPUT
+
+2025-12-02 22:33:36,042 - INFO - swea-agent - ========================= STEP 1 =========================
+2025-12-02 22:33:36,044 - DEBUG - swea-lm - n_cache_control: 0
+2025-12-02 22:33:36,050 - DEBUG - config - Choosing API key 0 for thread MainThread (idx 0)
+2025-12-02 22:34:37,941 - DEBUG - swea-lm - Response: ModelResponse(id='chatcmpl-82e60e85cfbf4011ae7e08f2da08e2ff', created=1764714817, model='Qwen/Qwen2.5-Coder-14B-Instruct-AWQ', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, message=Message(content="Sure, I'd be happy to help you resolve the issue in your codebase. To get started, I'll need some information from you:\n\n1. **Description of the Issue**: Please provide a detailed description of the problem you're encountering. What is happening that shouldn't be?\n\n2. **Reproduction Steps**: How can I reproduce the issue? Are there specific actions or conditions that need to be met?\n\n3. **Environment Details**: What environment are you working in? This could include the operating system, programming language, version of the language or framework, any dependencies, etc.\n\n4. **Code Snippets**: If possible, provide relevant code snippets where the issue might be occurring. This will help me understand the context better.\n\n5. **Error Messages**: If there are any error messages or logs, please share them. They can provide valuable clues about what's going wrong.\n\nOnce I have this information, I can start exploring the issue, reproducing it, and suggesting potential fixes. Let's get started!", role='assistant', tool_calls=None, function_call=None, provider_specific_fields={'refusal': None, 'reasoning': None}), provider_specific_fields={'stop_reason': None, 'token_ids': None})], usage=Usage(completion_tokens=206, prompt_tokens=52, total_tokens=258, completion_tokens_details=None, prompt_tokens_details=None), service_tier=None, prompt_logprobs=None, prompt_token_ids=None, kv_transfer_params=None)
+2025-12-02 22:34:37,949 - DEBUG - swea-lm - Error calculating cost: This model isn't mapped yet. model=openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json., setting cost to 0.
+2025-12-02 22:34:37,952 - ERROR - swea-lm - Error calculating cost: This model isn't mapped yet. model=openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json. for your model openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ. If this is ok (local models, etc.), please make sure you set `per_instance_cost_limit` and `total_cost_limit` to 0 to disable this safety check.
+2025-12-02 22:34:37,956 - ERROR - swea-agent - Exiting due to unknown error: Error calculating cost: This model isn't mapped yet. model=openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json. for your model openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ. If this is ok (local models, etc.), please make sure you set `per_instance_cost_limit` and `total_cost_limit` to 0 to disable this safety check.
+Traceback (most recent call last):
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/utils.py", line 4919, in _get_model_info_helper
+    raise ValueError(
+ValueError: This model isn't mapped yet. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sl5632/SWE-agent/sweagent/agent/models.py", line 737, in _single_query
+    cost = litellm.cost_calculator.completion_cost(response, model=self.config.name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/cost_calculator.py", line 1232, in completion_cost
+    raise e
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/cost_calculator.py", line 1225, in completion_cost
+    raise e
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/cost_calculator.py", line 1164, in completion_cost
+    ) = cost_per_token(
+        ^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/cost_calculator.py", line 397, in cost_per_token
+    return openai_cost_per_token(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/llms/openai/cost_calculation.py", line 35, in cost_per_token
+    return generic_cost_per_token(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/litellm_core_utils/llm_cost_calc/utils.py", line 524, in generic_cost_per_token
+    model_info = get_model_info(model=model, custom_llm_provider=custom_llm_provider)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/utils.py", line 5166, in get_model_info
+    _model_info = _get_model_info_helper(
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/litellm/utils.py", line 5084, in _get_model_info_helper
+    raise Exception(
+Exception: This model isn't mapped yet. model=openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/sl5632/SWE-agent/sweagent/agent/agents.py", line 1109, in forward_with_handling
+    return self.forward(history)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sl5632/SWE-agent/sweagent/agent/agents.py", line 1042, in forward
+    output = self.model.query(history)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sl5632/SWE-agent/sweagent/agent/models.py", line 802, in query
+    for attempt in Retrying(
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/tenacity/__init__.py", line 445, in __iter__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/tenacity/__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/site-packages/tenacity/__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/swe-agent/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/sl5632/SWE-agent/sweagent/agent/models.py", line 828, in query
+    result = self._query(messages, n=n, temperature=temperature)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sl5632/SWE-agent/sweagent/agent/models.py", line 784, in _query
+    outputs.extend(self._single_query(messages))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sl5632/SWE-agent/sweagent/agent/models.py", line 747, in _single_query
+    raise ModelConfigurationError(msg)
+sweagent.exceptions.ModelConfigurationError: Error calculating cost: This model isn't mapped yet. model=openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json. for your model openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ. If this is ok (local models, etc.), please make sure you set `per_instance_cost_limit` and `total_cost_limit` to 0 to disable this safety check.
+2025-12-02 22:34:37,971 - WARNING - swea-agent - Exit due to unknown error: Error calculating cost: This model isn't mapped yet. model=openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ, custom_llm_provider=openai. Add it here - https://github.com/BerriAI/litellm/blob/main/model_prices_and_context_window.json. for your model openai/Qwen/Qwen2.5-Coder-14B-Instruct-AWQ. If this is ok (local models, etc.), please make sure you set `per_instance_cost_limit` and `total_cost_limit` to 0 to disable this safety check.
+2025-12-02 22:34:37,974 - WARNING - swea-agent - Attempting autosubmission after error
+2025-12-02 22:34:37,980 - INFO - swea-agent - Executing submission command git add -A && git diff --cached > /root/model.patch in /testbed
+2025-12-02 22:34:38,002 - INFO - swea-agent - Found submission: 
+2025-12-02 22:34:38,005 - INFO - swea-agent - 🤖 MODEL INPUT
+Observation: 
+2025-12-02 22:34:38,008 - INFO - swea-agent - Trajectory saved to /home/sl5632/SWE-agent/trajectories/sl5632/vllm_qwen__openai--Qwen--Qwen2.5-Coder-14B-Instruct-AWQ__t-0.00__p-1.00__c-3.00___swe_bench_lite_dev/sqlfluff__sqlfluff-1625/sqlfluff__sqlfluff-1625.traj
+2025-12-02 22:34:38,012 - INFO - swea-env - Beginning environment shutdown...
+2025-12-02 22:34:38,383 - INFO - swea-save_apply_patch - No patch to save.
