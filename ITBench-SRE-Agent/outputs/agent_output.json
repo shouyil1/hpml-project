@@ -1,0 +1,58 @@
+{
+    "id": "inc-None",
+    "alert_start_time": "2025-11-21T07:02:59.496494",
+    "diag_end_time": "2025-11-21T07:06:06.492153",
+    "entities": [
+        {
+            "id": "23e93756db687b8f",
+            "root_cause": true
+        },
+        {
+            "id": "00bb54ea54c8c361",
+            "root_cause": true
+        },
+        {
+            "id": "76e276f69d5c5179",
+            "root_cause": true
+        }
+    ],
+    "propagations": [
+        {
+            "source": "23e93756db687b8f",
+            "target": "b40c546092df7cfe",
+            "condition": "ListProducts operation took over 16 seconds",
+            "effect": "High latency and error rate in the recommendation service"
+        },
+        {
+            "source": "10.96.96.64:8080",
+            "target": "00bb54ea54c8c361",
+            "condition": "Connection errors",
+            "effect": "High latency and errors in the frontend service"
+        },
+        {
+            "source": "CartService",
+            "target": "76e276f69d5c5179",
+            "condition": "Connection errors",
+            "effect": "High error rate in the checkout service"
+        }
+    ],
+    "remediation": [
+        [
+            {
+                "action": "Review the readiness probe configurations for the kube-apiserver-itbench-control-plane and coredns pods."
+            },
+            {
+                "action": "Delete the kube-apiserver-itbench-control-plane and coredns pods to force Kubernetes to recreate them."
+            },
+            {
+                "action": "Continuously monitor the health and readiness status of the kube-apiserver-itbench-control-plane and coredns pods."
+            },
+            {
+                "action": "Check for any network connectivity issues between the pods and the etcd cluster."
+            },
+            {
+                "action": "Validate any changes made to the readiness probe configurations to ensure they align with best practices."
+            }
+        ]
+    ]
+}

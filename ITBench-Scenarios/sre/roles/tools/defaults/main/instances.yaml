@@ -1,0 +1,10 @@
+---
+tools_instances:
+  clickhouse:
+    name: clickhouse
+    namespace: clickhouse
+  opentelemetry_collectors:
+    names:
+      jaeger: jaeger
+      kubernetes_events: kubenetes-events
+    namespace: opentelemetry-collectors

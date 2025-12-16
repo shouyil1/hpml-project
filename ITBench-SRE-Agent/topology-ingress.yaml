@@ -1,0 +1,36 @@
+# This creates a local alias in the 'prometheus' namespace
+# that points to the real service in 'kube-system'.
+apiVersion: v1
+kind: Service
+metadata:
+  name: topology-proxy-svc
+  namespace: prometheus
+spec:
+  type: ExternalName
+  externalName: topology-monitor-svc.kube-system.svc.cluster.local
+
+---
+
+# This creates the Ingress rule to expose the '/topology' path
+# and routes it to our new alias.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: topology-monitor-ingress
+  namespace: prometheus
+  annotations:
+    # This is important: it sends traffic to the root of the service
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /topology
+        pathType: Prefix
+        backend:
+          service:
+            # This points to the new 'ExternalName' service we just created
+            name: topology-proxy-svc
+            port:
+              number: 8080 # The port the service is listening on

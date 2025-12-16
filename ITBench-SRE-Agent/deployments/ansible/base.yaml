@@ -1,0 +1,10 @@
+---
+- name: SRE-Agent related tasks
+  hosts: localhost
+
+  vars_files:
+    - group_vars/all
+    - group_vars/sre_agent
+
+  roles:
+    - role: sre_agent

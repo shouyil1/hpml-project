@@ -1,0 +1,87 @@
+---
+- name: Create release namespace
+  kubernetes.core.k8s:
+    kubeconfig: "{{ tools_cluster.kubeconfig }}"
+    resource_definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "{{ helm_release.namespace }}"
+        labels:
+          it-bench/monitoring: "true"
+    state: present
+
+- name: Install Kubernetes Metrics Server
+  kubernetes.core.helm:
+    chart_ref: metrics-server
+    chart_repo_url: https://kubernetes-sigs.github.io/metrics-server/
+    chart_version: 3.13.0
+    kubeconfig: "{{ tools_cluster.kubeconfig }}"
+    release_name: "{{ helm_release.name }}"
+    release_namespace: "{{ helm_release.namespace }}"
+    release_state: present
+    timeout: 10m0s
+    values:
+      apiService:
+        insecureSkipTLSVerify: false
+      tls:
+        type: helm
+      serviceMonitor:
+        enabled: "{{ tools_required.prometheus }}"
+      #
+      # vvv ADD THIS ENTIRE 'args' BLOCK vvv
+      #
+      args:
+        - '--secure-port=10250'
+        - '--cert-dir=/tmp'
+        - '--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname'
+        - '--kubelet-use-node-status-port'
+        - '--metric-resolution=15s'
+        # These two lines are added by 'tls.type: helm'
+        - '--tls-cert-file=/tmp/tls-certs/tls.crt'
+        - '--tls-private-key-file=/tmp/tls-certs/tls.key'
+        # This is the required fix for 'kind' clusters
+        - '--kubelet-insecure-tls'
+      #
+      # ^^^ ADD THIS ENTIRE 'args' BLOCK ^^^
+      #
+    wait: "{{ tools_cluster.provider != 'kind' }}"
+
+- name: Handle certificate signing requests on Kind
+  when:
+    - tools_cluster.provider == 'kind'
+  block:
+    - name: Wait for Kubernetes metrics server pods to be created
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Pod
+        kubeconfig: "{{ tools_cluster.kubeconfig }}"
+        namespace: "{{ helm_release.namespace }}"
+        label_selectors:
+          - "app.kubernetes.io/name=metrics-server"
+      register: tools_kubernetes_metrics_server_pods
+      until: tools_kubernetes_metrics_server_pods.resources | length > 0
+      retries: 30
+      delay: 10
+
+    - name: Include tasks to approve pending certificate requests
+      ansible.builtin.include_role:
+        name: cluster
+        tasks_from: approve_certificate_requests
+      vars:
+        cluster_files:
+          kubeconfig: "{{ tools_cluster.kubeconfig }}"
+
+    - name: Wait for Kubernetes metrics server pods to be ready
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Pod
+        kubeconfig: "{{ tools_cluster.kubeconfig }}"
+        namespace: "{{ helm_release.namespace }}"
+        label_selectors:
+          - "app.kubernetes.io/name=metrics-server"
+        wait: true
+        wait_condition:
+          type: Ready
+          status: "True"
+        wait_timeout: 600

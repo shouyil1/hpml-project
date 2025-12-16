@@ -1,0 +1,35 @@
+dist: bionic
+services: docker
+language: python
+python:
+  - "3.12"
+
+before_install:
+  - sudo apt-get -y install curl wget
+addons:
+  apt:
+    update: true
+
+install:
+  - pip install -r requirements/core.txt
+  - pip install -r requirements/development_addons.txt
+  - pip install -r requirements/ui.txt
+
+script:
+  - tox
+  - make -C docs/ html
+  - touch docs/build/html/.nojekyll
+
+deploy:
+  - provider: pages
+    github_url: github.ibm.com
+    edge:
+      branch: v2.0.3-beta.4
+    skip_cleanup: true
+    verbose: true
+    local_dir: ./docs/build/html/
+    keep_history: true
+    deploy_key: $GITHUB_TOKEN
+    on:
+      all_branches: true
+    target_branch: gh-pages

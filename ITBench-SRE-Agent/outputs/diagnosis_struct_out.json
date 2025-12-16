@@ -1,0 +1,36 @@
+{
+  "entities": [
+    {
+      "id": "23e93756db687b8f",
+      "root_cause": true
+    },
+    {
+      "id": "00bb54ea54c8c361",
+      "root_cause": true
+    },
+    {
+      "id": "76e276f69d5c5179",
+      "root_cause": true
+    }
+  ],
+  "propagations": [
+    {
+      "source": "23e93756db687b8f",
+      "target": "b40c546092df7cfe",
+      "condition": "ListProducts operation took over 16 seconds",
+      "effect": "High latency and error rate in the recommendation service"
+    },
+    {
+      "source": "10.96.96.64:8080",
+      "target": "00bb54ea54c8c361",
+      "condition": "Connection errors",
+      "effect": "High latency and errors in the frontend service"
+    },
+    {
+      "source": "CartService",
+      "target": "76e276f69d5c5179",
+      "condition": "Connection errors",
+      "effect": "High error rate in the checkout service"
+    }
+  ]
+}
